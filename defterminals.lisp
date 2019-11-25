@@ -1,3 +1,5 @@
+;;;; These are the affixes of the Esperanto language, and a sizeable set of
+;;;; roots.
 (in-package #:esperanto)
 
 (defterminals 'correlative-prefix '(ĉi i ki neni ti))

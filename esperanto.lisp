@@ -1,5 +1,5 @@
 ;; Note: Only works if unicode is supported in symbols, due to espeanto's character
-;; set.
+;; set. It is possible to change the code such that this is not longer the case.
 (defpackage :esperanto
   (:use :cl :utils)
   (:nicknames :esp))
