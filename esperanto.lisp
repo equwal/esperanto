@@ -6,7 +6,6 @@
 
 (in-package :esperanto)
 
-
 (assert (unwind-protect (code-char  (1- 1114112)) nil))
 
 (defun inside (from into)
@@ -50,7 +49,7 @@
 
 (defun token? (class-item)
   (when (symbolp class-item)
-    (member class-item (list '⚚ '☧ '⅏ 'NIL))))
+    (member class-item (list 'unicode-pua-2 'unicode-pua-1 'unicode-pua-3 ''unicode-pua-4))))
 
 (defun token-class? (list)
   "Determine if the class is tokenized (as opposed to being a terminal-class)."
@@ -61,7 +60,7 @@
   (and (consp rule)
        (some #'(lambda (item)
 		 (eq (car rule)
-			  item)) (list '^ '+ 'g '*))
+         item)) (list '^ '+ 'g '*))
        (every #'terminal-class? (cdr rule))))
 
 ;; Notation:
@@ -73,88 +72,6 @@
 ;; There is an implicit (g ...) in defrule, so (defrule <rulename> (g ...))
 ;; defterminals are always of the form (defterminals <class> (<terminal> ...))
 
-(defterminals 'correlative-prefix '(ki ti i ĉi neni))
-
-(defterminals 'correlative-suffix '(a al am e el es o om u))
-
-(defterminals 'prefix '(ali bo chef cxef cxi ĉef dis ek eks el elektro fi fuŝ ge i ki kun M mal mis ne neni nov  po pra pseŭdo re retro sen ti ĉi))
-
-(defterminals 'noun-suffix '(ado ajho ajxo aĵo ano anto aro ato ĉjo eco edo ejo ero estro icho icxo iĉo ido iliardo ilio iliono ilo ingo ino into io ismo isto ito njo o oido ologo ono onto oto ulo ujo unto on))
-
-(defterminals 'adjective-suffix '(a anta ata eca ega ema enda inda inta ita manka obla ona onta ota oza riĉa unta))
-
-(defterminals 'verb-suffix '(adi i ighi igi igxi iĝi is os us ili as))
-
-(defterminals 'adverb-suffix '(ante e eble ope))
-
-(defterminals 'presuffix '(ant aĉ ad ar at ed eg estr et in ist unt ul er ing int ism ont ot um es it il iĉ icx ich an at ej))
-
-(defterminals 'root '(absolut aĉ aĉet ad adres afer afrik ag aĝ aĵ ajn akcept
-                      akv al ali almenaŭ alt am amas amerik amik ampleks amuz an
-                      angl ankaŭ ankoraŭ anonc anstataŭ ant antaŭ aparat apart
-                      aper ar aranĝ asoci aspekt at atend atent ating aŭ aŭd
-                      aŭskult aŭtobus aŭt av banan batal baz bedaŭr bel bend
-                      bezon bibliotek bild bilet bird bon botel bulgar cel cent
-                      centr cert ceter cigared ĉambr ĉar ĉarm ĉe ĉef ĉeval ĉi
-                      ĉiam ĉin ĉio ĉirkaŭ ĉiu ĉu da dan dank daŭr de debat decid
-                      deĵor dek dekstr delegaci demand dev dezir diabl difin dir
-                      dis diskriminaci diskut divers divid do dom don donac dorm
-                      du dum ebl ec eĉ edz eg ej ek eks ekskurs ekster ekzempl
-                      ekzempler ekzist el elekt en entrepren er erinac esenc
-                      esper est estr et eŭrop eventual evolu facil fak fakt fal
-                      famili far fart feliĉ ferm festival film fin finn firm fiŝ
-                      flank flav flor flug foj for forges form fort fot franc
-                      frank frat fraŭl fraz frenez fru funkci fuŝ ge german
-                      giĉet grad grand gratul grav grup gvid ĝen ĝeneral ĝi ĝis
-                      ĝoj ĝust ha hav hebre hejm help hieraŭ ho hodiaŭ hom hor
-                      hotel ia iam ide ie iel ig iĝ il ili imag in ind infan
-                      inform instru int inteligent inter interes interpret invit
-                      io iom ir iran ist it ital iu ja jam japan jar je jen jes
-                      jun ĵet kaj kamp kant kapabl kapt kar karot kart kaŝ kaz
-                      ke kelk kia kial kiam kie kiel kilo kio kiom kiu klar
-                      klopod knab kolor komenc komision komitat kompetent
-                      komplet komplik kompren kon koncept koncern kongres
-                      konkret konkur konsci konsent konserv konsil konsili
-                      konsist konstant kontakt kontraŭ kontrol korb korespond
-                      kost kovr kred kresk kri krom kruel kuir kuler kultur kun
-                      kunikl kur kutim kvankam kvar kvazaŭ kvin la labor lag
-                      lanĉ land las last laŭ lav leg lern lert leter lev li
-                      liber libr lig lingv list lit liter literatur loĝ lok long
-                      lu lud mal man manĝ manier mank map mar marŝ maŝin maten
-                      material mem membr memor met mez mi miks mil minimum minut
-                      mir moment mon monat mond mont montr morgaŭ mov mult naci
-                      naĝ nask naŭ ne neces nederland neniam nenio neniu nepr
-                      neŭtral ni nivel nokt nom normal nov nu nud numer nun nur
-                      ofert oficial oft ok okaz okcident okup ol on oni ont
-                      opini ord ordinar organiz orient ov pag paĝ paper pardon
-                      parol part pas paŝ patr pend pens per perd perfekt period
-                      persik person pet pied plaĉ plan plank plej plen pli plor
-                      plu plur pokal pom pont popular por port post postul pov
-                      prav precip preciz prefer preleg premi pren prepar preskaŭ
-                      pret prez prezent prezid pri princip pro problem produkt
-                      profesi profesor program proksim propon protest protokol
-                      prov publik punkt pup pur rajt rakont rapid raport re
-                      region regul reklam rekomend rekt relativ renkont respond
-                      rest riĉ ricev rid rigard rilat rimark river romp rus saĝ
-                      sal salon salt salut sam sat saŭn sci scienc se sed seg
-                      seks sekv semajn sen senc send sent sep serĉ seri ses si
-                      sid signif simil simpl simul sinjor siren sistem situaci
-                      skandinavi skatol ski skrib soci sol solv sorĉ spec
-                      special specif spert spinac star stat statut strat
-                      struktur stult sub sud sufiĉ suk sukces super supoz supr
-                      sur sved svis ŝaf ŝajn ŝanc ŝanĝ ŝat ŝi ŝip ŝir ŝlos ŝtel
-                      tabl tabul tag tajp tamen task te teatr tekst teler tem
-                      temp temperatur ten teren terur tia tial tiam tie tiel tim
-                      tio tiom tiu tra traduk trajn trakt tranĉ trans tre tri
-                      trink tro trov tuj tuk tuŝ tut uj ul um universal
-                      universitat unu urb uson util uz valor varm vast ven vend
-                      venk ver verk vesper vest veter vetur vi vid vin vir viv
-                      vizit voĉ voj vojaĝ vol volv vort vulp zorg))
-
-(defterminals 'oddball-suffixes '(aŭ j))
-
-;; Horrible kludge: Probability of breakage: < 2/2^21
-(defterminals 'tokens '(☧ nil ⅏ ⚚))
 
 ;; Compile-time functions for rules
 (defun expand-terminal (class)
@@ -182,19 +99,19 @@
 
 (defmacro exp-^ (args)
   "Given forms 1 2 3 ... in (^ 1 2 3 ...) expand it."
-  `(cons '☧ (exp-aux ,args)))
+  `(cons 'unicode-pua-1 (exp-aux ,args)))
 
 (defmacro exp-+ (args)
   "Expand (+ 1 2 3 ...)"
-  `(cons '➯ (exp-aux ,args)))
+  `(cons 'unicode-pua-4 (exp-aux ,args)))
 
 (defmacro exp-* (args)
   "Expand (* 1 2 3 ...)"
-  `(cons '⅏ (exp-aux ,args)))
+  `(cons 'unicode-pua-3 (exp-aux ,args)))
 
 (defmacro exp-g (args)
   "Expand (* 1 2 3 ...)"
-  `(cons '⚚ (exp-aux ,args)))
+  `(cons 'unicode-pua-2 (exp-aux ,args)))
 
 (defmacro defmatch (name symbol)
   "Create a true predicate to determine an expanded class's token."
@@ -204,10 +121,10 @@
 	    (and (symbolp (car ,expanded))
 		 (eq (car ,expanded) ',symbol))))))
 
-(defmatch g? ⚚)
-(defmatch ^? ☧)
-(defmatch *? ⅏)
-(defmatch +? ➯)
+(defmatch ^? unicode-pua-1)
+(defmatch g? unicode-pua-2)
+(defmatch *? unicode-pua-3)
+(defmatch +? unicode-pua-4)
 
 (defmacro expand-correct (args)
   "Auxillary macro for expand. Used for subterminal (operation terminal terminal...)
@@ -292,7 +209,7 @@
 
 (defun operation (word class)
   "Run the function operation for each class type."
-  (cond ((null class) '⅏)
+  (cond ((null class) 'unicode-pua-3)
 	((atom class) (match-terminal? word class))
 	((g? class)
 	 (symb (operation (cadr class)) (operation (cddr class))))
