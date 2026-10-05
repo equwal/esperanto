@@ -3,7 +3,7 @@
   :description  "Morphological compression of the Esperanto language."
   :author       "Spenser Truex <web@spensertruex.com>"
   :serial       t
-  :license      "GNU GPL v3"
+  :license      "LicenseRef-CCAI-1.0"
   :components ((:file "package")
                (:file "esperanto")
                (:file "defterminals")))
